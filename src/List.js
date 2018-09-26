@@ -110,3 +110,39 @@ List.prototype.moveTo = function(pos) {
 List.prototype.getList = function() {
   return this.lists[this.listPos] 
 }
+
+
+let lists = new List()
+lists.append('ziyi2')
+lists.append('ziyi3')
+console.log(lists)
+console.log(lists.find('ziyi2'))
+console.log(lists.toString())
+console.log(lists.length())
+lists.insertBefore('ziyi1', 'ziyi2')
+lists.insertBefore('ziyi23', 'ziyi3')
+console.log(lists.toString())
+lists.insertAfter('ziyi4', 'ziyi3')
+console.log(lists.toString())
+lists.insertAfter('ziyi223', 'ziyi2')
+console.log(lists.toString())
+lists.clear()
+console.log(lists.length())
+console.log(lists.contains('ziyi2'))
+lists.append('ziyi1')
+console.log(lists.contains('ziyi1'))
+lists.append('ziyi2')
+lists.append('ziyi3')
+lists.append('ziyi4')
+lists.front()
+console.log(lists.getList())
+lists.end()
+console.log(lists.getList())
+lists.prev()
+console.log(lists.getList())
+console.log(lists.length())
+console.log(lists.toString())
+for(lists.front(); lists.currPos() < lists.length() - 1; lists.next()) {
+  console.log(lists.currPos())
+  console.log(lists.getList())
+}
