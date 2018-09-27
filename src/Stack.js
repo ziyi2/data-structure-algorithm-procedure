@@ -1,3 +1,10 @@
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-09-27 09:08:27  
+ * @Desc:   栈 
+ * @Parm:    
+ */
+
 function Stack() {
   this.top = 0
   this.stack = []
