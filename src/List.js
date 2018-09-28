@@ -8,16 +8,16 @@
 function List() {
   this.listSize = 0
   this.listPos = 0
-  this.lists = []
+  this.list = []
 }
 
 List.prototype.append = function(list) {
-  this.lists[this.listSize ++] = list
+  this.list[this.listSize ++] = list
 }
 
 List.prototype.find = function(list) {
-  for(var i=0; i<this.lists.length; i++) {
-    if(this.lists[i] === list) {
+  for(var i=0; i<this.list.length; i++) {
+    if(this.list[i] === list) {
       return i
     }
   }
@@ -27,7 +27,7 @@ List.prototype.find = function(list) {
 List.prototype.remove = function(list) {
   var foundAt = this.find(list)
   if(foundAt > -1) {
-    this.lists.splice(foundAt, 1)
+    this.list.splice(foundAt, 1)
     -- this.listSize
     return true
   }
@@ -39,13 +39,13 @@ List.prototype.length = function() {
 }
 
 List.prototype.toString = function() {
-  return this.lists.join(',')
+  return this.list.join(',')
 }
 
 List.prototype.insertBefore = function(list, after) {
   var insertAt = this.find(after)
   if(insertAt > -1) {
-    this.lists.splice(insertAt, 0, list)
+    this.list.splice(insertAt, 0, list)
     ++ this.listSize
     return true
   }
@@ -56,7 +56,7 @@ List.prototype.insertBefore = function(list, after) {
 List.prototype.insertAfter = function(list, before) {
   var insertAt = this.find(before)
   if(insertAt > -1) {
-    this.lists.splice(insertAt + 1, 0, list)
+    this.list.splice(insertAt + 1, 0, list)
     ++ this.listSize
     return true
   }
@@ -64,14 +64,14 @@ List.prototype.insertAfter = function(list, before) {
 }
 
 List.prototype.clear = function() {
-  delete this.lists
-  this.lists = []
+  delete this.list
+  this.list = []
   this.listSize = this.listPos = 0
 } 
 
 List.prototype.contains = function(list) {
-  for(var i=0; i<this.lists.length; i++) {
-    if(this.lists[i] === list) {
+  for(var i=0; i<this.list.length; i++) {
+    if(this.list[i] === list) {
       return true
     }
   }
@@ -108,41 +108,41 @@ List.prototype.moveTo = function(pos) {
 }
 
 List.prototype.getList = function() {
-  return this.lists[this.listPos] 
+  return this.list[this.listPos] 
 }
 
 
-let lists = new List()
-lists.append('ziyi2')
-lists.append('ziyi3')
-console.log(lists)
-console.log(lists.find('ziyi2'))
-console.log(lists.toString())
-console.log(lists.length())
-lists.insertBefore('ziyi1', 'ziyi2')
-lists.insertBefore('ziyi23', 'ziyi3')
-console.log(lists.toString())
-lists.insertAfter('ziyi4', 'ziyi3')
-console.log(lists.toString())
-lists.insertAfter('ziyi223', 'ziyi2')
-console.log(lists.toString())
-lists.clear()
-console.log(lists.length())
-console.log(lists.contains('ziyi2'))
-lists.append('ziyi1')
-console.log(lists.contains('ziyi1'))
-lists.append('ziyi2')
-lists.append('ziyi3')
-lists.append('ziyi4')
-lists.front()
-console.log(lists.getList())
-lists.end()
-console.log(lists.getList())
-lists.prev()
-console.log(lists.getList())
-console.log(lists.length())
-console.log(lists.toString())
-for(lists.front(); lists.currPos() < lists.length() - 1; lists.next()) {
-  console.log(lists.currPos())
-  console.log(lists.getList())
+let list = new List()
+list.append('ziyi2')
+list.append('ziyi3')
+console.log(list)
+console.log(list.find('ziyi2'))
+console.log(list.toString())
+console.log(list.length())
+list.insertBefore('ziyi1', 'ziyi2')
+list.insertBefore('ziyi23', 'ziyi3')
+console.log(list.toString())
+list.insertAfter('ziyi4', 'ziyi3')
+console.log(list.toString())
+list.insertAfter('ziyi223', 'ziyi2')
+console.log(list.toString())
+list.clear()
+console.log(list.length())
+console.log(list.contains('ziyi2'))
+list.append('ziyi1')
+console.log(list.contains('ziyi1'))
+list.append('ziyi2')
+list.append('ziyi3')
+list.append('ziyi4')
+list.front()
+console.log(list.getList())
+list.end()
+console.log(list.getList())
+list.prev()
+console.log(list.getList())
+console.log(list.length())
+console.log(list.toString())
+for(list.front(); list.currPos() < list.length() - 1; list.next()) {
+  console.log(list.currPos())
+  console.log(list.getList())
 }
