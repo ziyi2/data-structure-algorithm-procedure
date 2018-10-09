@@ -120,7 +120,7 @@ LinkList.prototype.remove = function(element) {
  */
 function DoublyNode(element) {
   this.element = element
-  // 后置节点
+  // 后继节点
   this.next = null
   // 前驱节点
   this.previous = null
@@ -130,7 +130,7 @@ function DoublyNode(element) {
 /** 
  * @Author: zhuxiankang 
  * @Date:   2018-10-09 08:32:39  
- * @Desc:   双向操作链表 
+ * @Desc:   双向操作链表(可以反序遍历节点)
  * @Parm:    
  */
 function DoublyLinkList() {
@@ -214,18 +214,41 @@ DoublyLinkList.prototype.displayReverse = function() {
   }
 }
 
+// var doublyLink = new DoublyLinkList()
+// doublyLink.insert('ziyi0', 'head')
+// doublyLink.insert('ziyi1', 'ziyi0')
+// doublyLink.insert('ziyi2', 'ziyi1')
+// doublyLink.remove('ziyi1')
+// doublyLink.displayReverse()
 
 
-var doublyLink = new DoublyLinkList()
-doublyLink.insert('ziyi0', 'head')
-doublyLink.insert('ziyi1', 'ziyi0')
-doublyLink.insert('ziyi2', 'ziyi1')
-doublyLink.remove('ziyi1')
-doublyLink.displayReverse()
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:52:42  
+ * @Desc:   循环链表(可以反序遍历链表，不用付出额外代价创建双向链表，也可以从任何节点开始遍历链表) 
+ * @Parm:    
+ */
+function LoopLinkList() {
+  this.head = new Node()
+  // 默认尾节点指向头节点
+  this.head.next = this.head
+}
 
 
-
-
-
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:57:19  
+ * @Desc:   显示链表 
+ * @Parm:    
+ */
+LoopLinkList.prototype.display = function() {
+  var currentNode = this.head
+  // 当循环到头节点时退出循环
+  while(!(currentNode.next === null) && 
+        !(currentNode.next.element === 'head')) {
+    console.log(currentNode.next)      
+    currentNode = currentNode.next
+  }
+}
 
 
