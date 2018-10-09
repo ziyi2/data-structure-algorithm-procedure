@@ -98,19 +98,130 @@ LinkList.prototype.remove = function(element) {
   }
 }
 
-var links = new LinkList()
-links.insert('ziyi2', 'head')
-console.log(links.find('ziyi2'))
-links.insert('ziyi3', 'ziyi2')
-console.log(links.find('ziyi3'))
-links.insert('ziyi4', 'ziyi3')
-console.log(links.find('ziyi4'))
-links.display()
+// var link = new LinkList()
+// link.insert('ziyi2', 'head')
+// console.log(link.find('ziyi2'))
+// link.insert('ziyi3', 'ziyi2')
+// console.log(link.find('ziyi3'))
+// link.insert('ziyi4', 'ziyi3')
+// console.log(link.find('ziyi4'))
+// link.display()
 
-links.remove('ziyi3')
-links.display()
+// link.remove('ziyi3')
+// link.display()
 
 
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:29:20  
+ * @Desc:   可从后向前遍历的双向链表 
+ * @Parm:    
+ */
+function DoublyNode(element) {
+  this.element = element
+  // 后置节点
+  this.next = null
+  // 前驱节点
+  this.previous = null
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:32:39  
+ * @Desc:   双向操作链表 
+ * @Parm:    
+ */
+function DoublyLinkList() {
+  this.head = new DoublyNode('head')
+} 
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:34:09  
+ * @Desc:   查找节点 
+ * @Parm:    
+ */
+DoublyLinkList.prototype.find = function(element) {
+  var currentNode = this.head
+  while(currentNode.element !== element) {
+    currentNode = currentNode.next
+  }
+  return currentNode
+}
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:33:17  
+ * @Desc:   插入节点 
+ * @Parm:    
+ */
+DoublyLinkList.prototype.insert = function(element, after) {
+  var newNode = new DoublyNode(element)
+  var currentNode = this.find(after)
+  newNode.next = currentNode.next
+  newNode.previous = currentNode
+  // 注意currentNode的前置节点仍然没有变化
+  currentNode.next = newNode
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:36:27  
+ * @Desc:   删除节点 
+ * @Parm:    
+ */
+DoublyLinkList.prototype.remove = function(element) {
+  var currentNode = this.find(element)
+  delete this.find(element)
+  while(!(currentNode.next === null)) {
+    currentNode.previous.next = currentNode.next
+    currentNode.next.previous = currentNode.previous
+    currentNode.next = null
+    currentNode.previous = null
+  }
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:40:07  
+ * @Desc:   查找最后一个节点 
+ * @Parm:    
+ */
+DoublyLinkList.prototype.findLast = function() {
+  var currentNode = this.head
+  while(!(currentNode.next === null)) {
+    currentNode = currentNode.next
+  }
+  return currentNode
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-09 08:41:42  
+ * @Desc:   反序显示双向链表的元素 
+ * @Parm:    
+ */
+DoublyLinkList.prototype.displayReverse = function() {
+  var currentNode = this.findLast()
+  while(!(currentNode.previous === null)) {
+    console.log(currentNode)
+    currentNode = currentNode.previous
+  }
+}
+
+
+
+var doublyLink = new DoublyLinkList()
+doublyLink.insert('ziyi0', 'head')
+doublyLink.insert('ziyi1', 'ziyi0')
+doublyLink.insert('ziyi2', 'ziyi1')
+doublyLink.remove('ziyi1')
+doublyLink.displayReverse()
 
 
 
