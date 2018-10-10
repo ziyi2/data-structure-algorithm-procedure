@@ -2,8 +2,12 @@
  * @Author: zhuxiankang 
  * @Date:   2018-09-27 09:08:27  
  * @Desc:   栈 
- * @Parm:    
  */
+
+/*
+栈是一种先进后出的高效数据结构，因为数据只能在栈顶添加或删除，这样的操作很快，而且容易实现。
+*/
+
 
 function Stack() {
   this.top = 0
