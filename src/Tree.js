@@ -187,12 +187,12 @@ bst.postOrder(bst.root)
  * @Desc:   二叉树查找 - 查找最大值 
  * @Parm:    
  */
-BST.prototype.getMax = function() {
-  var currentNode = this.root
-  while(currentNode.left !== null) {
-    currentNode = currentNode.left
+BST.prototype.getMax = function(root) {
+  var currentNode = root
+  while(currentNode.right !== null) {
+    currentNode = currentNode.right
   }
-  return currentNode.data
+  return currentNode
 }
 
 
@@ -202,16 +202,16 @@ BST.prototype.getMax = function() {
  * @Desc:   二叉树查找 - 查找最小值 
  * @Parm:    
  */
-BST.prototype.getMin = function() {
-  var currentNode = this.root
-  while(currentNode.right !== null) {
-    currentNode = currentNode.right
+BST.prototype.getMin = function(root) {
+  var currentNode = root
+  while(currentNode.left !== null) {
+    currentNode = currentNode.left
   }
-  return currentNode.data
+  return currentNode
 }
 
-console.log(bst.getMax())
-console.log(bst.getMin())
+console.log(bst.getMax(bst.root))
+console.log(bst.getMin(bst.root))
 
 
 /** 
@@ -221,6 +221,82 @@ console.log(bst.getMin())
  * @Parm:    
  */
 
- BST.prototype.get = function() {
-   
+ BST.prototype.get = function(data) {
+   var currentNode = this.root
+   while(currentNode !== null) {
+     if(currentNode.data === data) {
+       return currentNode
+     // 当前节点的值比查找值小，则需要查看当前节点的右子节点  
+     } else if(currentNode.data < data) {
+       currentNode = currentNode.right
+     } else {
+       currentNode = currentNode.left
+     }
+   }
+   return null
  }
+
+
+ console.log(bst.get(3))
+
+
+ /** 
+  * @Author: zhuxiankang 
+  * @Date:   2018-10-16 08:54:56  
+  * @Desc:   二叉树删除节点 
+  * @Parm:    
+  */ 
+ BST.prototype.remove = function(node, data) {
+   if(data == null) {
+     return null
+   }
+
+   if(data === node.data) {
+      // 当前待删除的节点没有子节点
+      if(node.left === null && node.right === null) {
+        // 设置指向待删除节点的父节点指向null
+        return null
+      } 
+
+      // 当前待删除的节点没有左节点
+      if(node.left === null) {
+        // 设置指向待删除节点的父节点指向待删除节点的右节点
+        return node.right
+      }
+
+      // 当前待删除的节点没有右节点
+      if(node.right === null) {
+        // 设置指向待删除节点的父节点指向待删除节点的左节点
+        return node.left
+      }
+
+      // 当前待删除的节点既有左节点也有右节点
+      // 寻找右子树中最小键值的节点，放置待删除节点位置
+      // 因为右子树最小键值的节点肯定比左子树最大键值的节点大，比右子树中的所有节点小
+      // 符合二叉树键值小与父节点的节点放在左子节点，键值大与父节点的节点放在右子节点的定律
+      let tempNode = this.getMin(node.right)
+      // 将最小键放置在待删除节点的位置
+      node.data = tempNode.data
+      // 删除被移动的节点
+      node.right = this.remove(node.right, tempNode.data)
+      // 需要注意返回值会被递归使用
+      return node
+
+   // 需要删除的节点在左子节点中
+   } else if(data < node.data) {
+     node.left = this.remove(node.left, data)
+     // 需要注意返回值会被递归使用
+     return node
+   // 需要删除的节点在右子节点中  
+   } else {
+     node.right = this.remove(node.right, data)
+     // 需要注意返回值会被递归使用
+     return node
+   }
+ }
+
+
+ console.log(bst.root)
+
+ console.log(bst.remove(bst.root, 45))
+ console.log(bst.root)
