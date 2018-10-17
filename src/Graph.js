@@ -56,7 +56,6 @@ function Graph(v) {
   this.adj = []
   for(let i=0; i<this.vertices; i++) {
     this.adj[i] = []
-    this.adj[i].push('')
   }
 }
 
@@ -67,7 +66,7 @@ function Graph(v) {
  * @Parm:    
  */
 Graph.prototype.addEdge = function(v, w) {
-  thia.adj[v].push(w)
+  this.adj[v].push(w)
   this.adj[w].push(v)
   this.edges ++
 }
@@ -81,11 +80,135 @@ Graph.prototype.addEdge = function(v, w) {
  */
 Graph.prototype.show = function() {
   for(let i=0; i<this.vertices; i++) {
-    console.log('i -> ')
+    console.log('i -> ', i)
     for(j=0; j<this.vertices; j++) {
-      if(this.adj[i][j]) {
+      if(this.adj[i][j] !== undefined) {
         console.log(this.adj[i][j])
       }
     }
   }
 }
+
+
+let g = new Graph(10)
+console.log(g)
+
+g.addEdge(0,1)
+g.addEdge(1,3)
+
+console.log(g.show())
+
+
+/*
+
+图搜索
+
+深度优先搜索：
+
+从一条路径的起始顶点开始追溯，直到到达最后一个顶点，然后回溯，继续追溯下一条路径，知道到达最后一个顶点，如此往复，直到没有路径为止。
+这不是搜索特定的路径，而是通过搜索来查看图中有哪些路径可以选择。
+
+*/
+
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-17 09:23:17  
+ * @Desc:   深度优先搜索 
+ * @Parm:    
+ */
+function DeepFirstGraph(v) {
+  // 顶点数
+  this.vertices = v
+  // 边数
+  this.edges = 0
+  this.adj = []
+  // 是否被访问
+  this.marked = []
+
+  for(var i=0; i<this.vertices; i++) {
+    this.adj[i] = []
+    this.marked[i] = false
+  }
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-16 20:35:37  
+ * @Desc:   添加边 
+ * @Parm:    
+ */
+DeepFirstGraph.prototype.addEdge = function(v, w) {
+  this.adj[v].push(w)
+  this.adj[w].push(v)
+  this.edges ++
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-17 08:51:58  
+ * @Desc:   深度优先搜索
+ * @Parm:    
+ */
+DeepFirstGraph.prototype.deepFirstSearch = function(v) {
+  // 表明当前顶点被访问过
+  this.marked[v] = true
+
+  if(!this.adj[v] === undefined) return
+
+  // 当前被访问的顶点
+  console.log('visited: ', v)
+
+  // 遍历和顶点v有边链接的其他顶点
+  for(let w of this.adj[v]) {
+    // 如果当前顶点没有被访问过，则继续访问
+    if(!this.marked[w]) {
+      this.deepFirstSearch(w)
+    }
+  }
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-16 20:38:47  
+ * @Desc:   显示图 
+ * @Parm:    
+ */
+DeepFirstGraph.prototype.show = function() {
+  for(let i=0; i<this.vertices; i++) {
+    console.log('i -> ', i)
+    for(j=0; j<this.vertices; j++) {
+      if(this.adj[i][j] !== undefined) {
+        console.log(this.adj[i][j])
+      }
+    }
+  }
+}
+
+
+let deepFirstGraph = new DeepFirstGraph(6)
+deepFirstGraph.addEdge(0,1)
+deepFirstGraph.addEdge(0,2)
+deepFirstGraph.addEdge(0,3)
+deepFirstGraph.addEdge(2,4)
+deepFirstGraph.addEdge(2,3)
+deepFirstGraph.addEdge(3,1)
+deepFirstGraph.addEdge(3,5)
+deepFirstGraph.deepFirstSearch(0)
+
+/*
+
+广度优先搜索：
+从第一个顶点开始，尝试访问尽可能靠近它的顶点。
+这种搜索在图上是逐层移动的，首先检查最靠近第一个顶点的层，再逐渐向下移动到离起始顶点最远的层。
+
+广度优先搜索使用抽象的队列而不是数组对已访问过的顶点进行排序：
+- 1. 查找与当前顶点相邻的未访问顶点，将其添加到已访问顶点列表及队列中
+- 2. 从图中取出下一个顶点v，添加到已访问的顶点列表
+- 3. 将所有与v相邻的未访问顶点添加到队列
+
+*/
