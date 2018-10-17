@@ -212,3 +212,130 @@ deepFirstGraph.deepFirstSearch(0)
 - 3. 将所有与v相邻的未访问顶点添加到队列
 
 */
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-17 20:29:24  
+ * @Desc:   广度优先搜索 
+ * @Parm:    
+ */
+function BreadthFirstGraph(v) {
+  // 顶点数
+  this.vertices = v
+  // 边数
+  this.edges = 0
+  this.adj = []
+  // 是否被访问
+  this.marked = []
+
+  for(var i=0; i<this.vertices; i++) {
+    this.adj[i] = []
+    this.marked[i] = false
+  }
+}
+
+BreadthFirstGraph.prototype.addEdge = function(v, w) {
+  this.adj[v].push(w)
+  this.adj[w].push(v)
+  this.edges ++
+}
+
+BreadthFirstGraph.prototype.breadthFirstSearch = function(s) {
+   // 相邻未访问顶点队列（默认第一个顶点相邻顶点就是自己）
+   var queue = []
+   this.marked[s] = true
+   queue.push(s)
+
+   while(queue.length) {
+    // 从图中取出下一个相邻的顶点
+     var v = queue.shift()
+     if(v !== undefined) {
+      console.log('breadth visited: ', v)
+     }
+    
+     // 查找与当前顶点相邻的未访问顶点，将其添加到已访问顶点列表及队列中
+     for(let w of this.adj[v]) {
+       if(!this.marked[w]) {
+         this.marked[w] = true
+         queue.push(w)
+       }
+     }
+   }
+}
+
+let breadthFirstGraph = new BreadthFirstGraph(5)
+breadthFirstGraph.addEdge(0, 1)
+breadthFirstGraph.addEdge(0, 2)
+breadthFirstGraph.addEdge(1, 3)
+breadthFirstGraph.addEdge(2, 4)
+breadthFirstGraph.breadthFirstSearch(0)
+
+
+/*
+查找最短路径
+
+广度优先搜索对应的最短路径
+*/
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-17 21:13:00  
+ * @Desc:   广度优先搜索对应的最短路径 
+ * @Parm:    
+ */
+function MinPathGraph(v) {
+  // 从一个顶点到下一个顶点的边
+  this.edgeTo = []
+  // 顶点数
+  this.vertices = v
+  // 边数
+  this.edges = 0
+  this.adj = []
+  // 是否被访问
+  this.marked = []
+
+  for(var i=0; i<this.vertices; i++) {
+    this.adj[i] = []
+    this.marked[i] = false
+  }
+}
+
+MinPathGraph.prototype.addEdge = function(v, w) {
+  this.adj[v].push(w)
+  this.adj[w].push(v)
+  this.edges ++
+}
+
+MinPathGraph.prototype.breadthFirstSearch = function(s) {
+  var queue = []
+  this.marked[s] = true
+  queue.push(s)
+
+  while(queue.length) {
+    var v = queue.shift()
+
+    if(v !== undefined) {
+      console.log('min path visited: ', v)
+    }
+
+    for(let w of this.adj[v]) {
+      if(!this.marked[w]) {
+        this.marked[w] = true
+        this.edgeTo[w]= v
+        queue.push(w)
+      }
+    }
+  }
+} 
+
+
+let minPathGraph = new MinPathGraph(5)
+minPathGraph.addEdge(0, 1)
+minPathGraph.addEdge(0, 2)
+minPathGraph.addEdge(1, 3)
+minPathGraph.addEdge(1, 2)
+minPathGraph.addEdge(1, 4)
+minPathGraph.addEdge(2, 4)
+minPathGraph.breadthFirstSearch(0)
+console.log(minPathGraph.edgeTo)
