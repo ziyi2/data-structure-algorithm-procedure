@@ -331,11 +331,61 @@ MinPathGraph.prototype.breadthFirstSearch = function(s) {
 
 
 let minPathGraph = new MinPathGraph(5)
-minPathGraph.addEdge(0, 1)
-minPathGraph.addEdge(0, 2)
-minPathGraph.addEdge(1, 3)
 minPathGraph.addEdge(1, 2)
 minPathGraph.addEdge(1, 4)
 minPathGraph.addEdge(2, 4)
+minPathGraph.addEdge(0, 1)
+minPathGraph.addEdge(0, 2)
+minPathGraph.addEdge(1, 3)
+minPathGraph.addEdge(2, 3)
 minPathGraph.breadthFirstSearch(0)
 console.log(minPathGraph.edgeTo)
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-18 08:50:23  
+ * @Desc:   pathTo 
+ * @Parm:    
+ */
+MinPathGraph.prototype.pathTo = function(v) {
+  // 起始顶点是0
+  let source = 0
+  if(!this.marked[v]) {
+    return undefined
+  }
+
+  let path = []
+
+  for(var i = v; i!= source; i=this.edgeTo[i]) {
+    path.push(i)
+  }
+
+  path.push(source)
+  return path
+}
+
+
+let minPath = minPathGraph.pathTo(4)
+console.log(minPath)
+
+
+/** 
+问题记录：
+minPathGraph.addEdge(1, 2)
+minPathGraph.addEdge(1, 4)
+minPathGraph.addEdge(2, 4)
+minPathGraph.addEdge(0, 1)
+minPathGraph.addEdge(0, 2)
+minPathGraph.addEdge(1, 3)
+minPathGraph.addEdge(2, 3)
+
+采用这种最小路径法，必须将最小的值放在前面，例如如果这里将
+minPathGraph.addEdge(0, 1)
+minPathGraph.addEdge(0, 2)
+调换位置，变成
+minPathGraph.addEdge(0, 2)
+minPathGraph.addEdge(0, 1)
+那么算出来的最小路径就不对了，例如算0到3的最小路径，算出来是0 - 2 - 3
+ */
+
