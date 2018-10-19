@@ -8,3 +8,5 @@
 - [集合](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Set.js)
 - [二叉树](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Tree.js)
 - [图](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Graph.js)
+- 排序
+ - [冒泡排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/BubbleSort.js)
