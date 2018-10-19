@@ -8,9 +8,6 @@
 /** 
 冒泡排序：
 
-比较两个相邻的元素，将值大的元素交换至右端。
-
-
 举例说明：要排序数组：let arr= [6,3,8,2,9,1]   
 
 第一趟排序(次数 6 - 1 = 5)：
@@ -77,7 +74,6 @@
 
 ---------------------------------------------------------------------
 
-
 N(以上是6)个数字要排序完成，总共要进行N-1(6-1=5)趟排序，第I趟排序的次数为N-I次。
 
 以以上排序为例，进行完第1趟排序，最后一个数字肯定是最大的数字
@@ -88,14 +84,90 @@ N(以上是6)个数字要排序完成，总共要进行N-1(6-1=5)趟排序，第
 
 直至最后数字都从小到大排序。
 
+冒泡排序的时间复杂度是O(n2)。
 
-用时间复杂度来说：
-
-　　1.如果我们的数据正序，只需要走一趟即可完成排序。所需的比较次数C和记录移动次数M均达到最小值，即：Cmin=n-1;Mmin=0;所以，冒泡排序最好的时间复杂度为O(n)。
-
-　　2.如果很不幸我们的数据是反序的，则需要进行n-1趟排序。每趟排序要进行n-i次比较(1≤i≤n-1)，且每次比较都必须移动记录三次来达到交换记录位置。在这种情况下，比较和移动次数均达到最大值：冒泡排序的最坏时间复杂度为：O(n2) 。
-
-综上所述：冒泡排序总的平均时间复杂度为：O(n2) 。
-https://www.cnblogs.com/shen-hua/p/5422676.html
+冒泡排序是最慢的排序算法之一。
 */
+
+// 辅助数组类
+// ---------------------------------------------------------------------
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-19 19:08:59  
+ * @Desc:   辅助数组类 
+ * @Parm:    
+ */
+function CArray(number) {
+  this.data = []
+  for(let i=0; i<number; i++) {
+    this.data[i] = i
+  }
+}
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-19 19:14:38  
+ * @Desc:   设置随机数 
+ * @Parm:    
+ */
+CArray.prototype.random = function() {
+  for (let i=0,len=this.data.length; i <len; ++i) {
+    this.data[i] = Math.floor(Math.random() * (len + 1))
+  }
+}
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-19 19:14:38  
+ * @Desc:   清除数据 
+ * @Parm:    
+ */
+CArray.prototype.clear = function() {
+  for (let i=0,len=this.data.length; i <len; ++i) {
+    this.data[i] = 0
+  }
+}
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-19 19:16:04  
+ * @Desc:   显示数据 
+ * @Parm:    
+ */
+CArray.prototype.show = function() {
+  let retstr = ''
+  for (let i=0,len=this.data.length; i <len; ++i) {
+    retstr += this.data[i] + " ";
+    if (i > 0 & i % 10 == 0) {
+      retstr += "\n";
+    }
+  }
+  return retstr
+}
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-10-19 19:19:13  
+ * @Desc:   交换数据 
+ * @Parm:    
+ */
+CArray.prototype.swap = function(arr, index1, index2) {
+  let temp = this.data[index1]
+  this.data[index1] = this.data[index2]
+  this.data[index2] = temp
+}
+
+let arr = new CArray(100)
+arr.random()
+console.log(arr.show())
+
+
+// 冒泡排序
+// ---------------------------------------------------------------------
+CArray.prototype.bubbleSort = function() {
+  
+}
+
 
