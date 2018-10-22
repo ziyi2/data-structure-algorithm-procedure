@@ -153,7 +153,7 @@ CArray.prototype.show = function() {
  * @Desc:   交换数据 
  * @Parm:    
  */
-CArray.prototype.swap = function(arr, index1, index2) {
+CArray.prototype.swap = function(index1, index2) {
   let temp = this.data[index1]
   this.data[index1] = this.data[index2]
   this.data[index2] = temp
@@ -167,7 +167,18 @@ console.log(arr.show())
 // 冒泡排序
 // ---------------------------------------------------------------------
 CArray.prototype.bubbleSort = function() {
-  
+  // 外部循环确定需要比较的最后一个值
+  // 比如第一次一直要两两比较到最后一个(这样第一次内部循环计算出最大值放到最后一个)
+  // 第二次一直要两两比较到倒数第二个(这样第二次内部循环计算出剩余的最大值放到倒数第二个)
+  // ...
+  for(let i=this.data.length; i>=2; i--) {
+    for(let j=0; j<i-1; j++) {
+      if(this.data[j] > this.data[j+1]) {
+        this.swap(j, j+1)
+      }
+    }
+  }
 }
 
-
+arr.bubbleSort()
+console.log(arr.show())
