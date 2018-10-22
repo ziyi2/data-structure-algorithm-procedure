@@ -12,3 +12,4 @@
 
 ### 排序
  - [冒泡排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/BubbleSort.js)
+ - [选择排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/SelectionSort.js)
