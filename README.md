@@ -14,5 +14,11 @@
 - [冒泡排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/BubbleSort.js)
 - [选择排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/SelectionSort.js)
 - [插入排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/InsertionSort.js)
+> 在排序数据较多时，插入排序最快，选择排序第二，冒泡排序最慢。
+
+### 高级排序
+- [希尔排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/ShellSort.js)
+
+
 
 ### 检索
