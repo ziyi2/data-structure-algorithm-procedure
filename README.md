@@ -1,6 +1,6 @@
 # 数据结构和算法
 
-### 数据结构
+## 数据结构
 - [列表](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/List.js)
 - [栈](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Stack.js)
 - [队列](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Queue.js)
@@ -10,15 +10,17 @@
 - [二叉树](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Tree.js)
 - [图](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Graph.js)
 
-### 排序
+## 排序
 - [冒泡排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/BubbleSort.js)
 - [选择排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/SelectionSort.js)
 - [插入排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/InsertionSort.js)
 > 在排序数据较多时，插入排序最快，选择排序第二，冒泡排序最慢。
 
-### 高级排序
+## 高级排序
 - [希尔排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/ShellSort.js)
+- [归并排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/MergeSort.js)
 
 
+## 参考资料
 
-### 检索
+- [JavaScript Algorithms and Data Structures](https://github.com/trekhleb/javascript-algorithms)
