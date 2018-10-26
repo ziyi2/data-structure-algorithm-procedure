@@ -50,24 +50,22 @@ function mergeSort (arr) {
     left = 0
     right = step
 
-    console.log('left: ', left)
-    console.log('right: ', right)
-
     // 第一次step = 1，将一个数组拆分被只有一个元素的多个数组
     // 第二次step = 2, 将拆分的只有一个元素的数组合并成排好序的只有2个元素的多个数组
     // ...
+
+    // 注意
+    // 这里考虑的是左右数组元素个数一致的情况
     while(right + step <= arr.length) {
       mergeArrays(arr, left, left+step, right, right+step)
       left = right + step
       right = left + step
-      console.log('left: ', left)
-      console.log('right: ', right)
     }
 
-    console.log('finally right: ', right)
 
+    // 这里考虑的是左右数组元素个数不一致的情况
     if(right < arr.length) {
-      console.log('at right: ', right)
+      mergeArrays(arr, left, left+step, right, arr.length)
     }
 
     // 第一次step = 1,
@@ -88,7 +86,48 @@ function mergeSort (arr) {
  *          rightEnd    ->  合并的右结束地址
  */
 function mergeArrays(arr, leftStart, leftEnd, rightStart, rightEnd) {
-  
+  let rightArr = new Array(rightEnd - rightStart + 1)
+  let leftArr = new Array(leftEnd - leftStart + 1)
+  let k = rightStart
+
+  // 对需要排序的数组按照step进行数组拆分，拆分成一个个小数组
+
+  for(let i=0; i<rightArr.length - 1; i++) {
+    rightArr[i] = arr[k]
+    ++k
+  }
+
+  k = leftStart
+
+  for(let i=0; i<leftArr.length - 1; i++) {
+    leftArr[i] = arr[k]
+    ++k
+  }
+
+  rightArr[rightArr.length-1] = Infinity // 哨兵值
+  leftArr[leftArr.length-1] = Infinity // 哨兵值
+
+
+  // 对拆分的数组进行从小到大排序
+
+  let m=0,
+      n=0;
+
+
+  for(let k = leftStart; k < rightEnd; k++) {
+    // 如果左数组小于右数组则当前序列插入左数组值
+    // 需要如果右数组已经插入完毕了，那么右数组的值是Infinity，此时始终会插入左数组值
+    if(leftArr[m] <= rightArr[n]) {
+      arr[k] = leftArr[m]
+      m++
+    // 否则插入右数组值  
+    // 如果左数组已经插入完毕，那么左数组的最后值是Infinity，此时始终会插入右数组值
+    } else {
+      arr[k] = rightArr[n]
+      n++
+    }
+  }    
+
 } 
 
 
