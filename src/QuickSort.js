@@ -47,6 +47,8 @@ function quickSort(arr) {
   // 同理递归right [9]
 
   // [3].concat(6, [9]) = [3,6,9]
+
+  // 可见在数据比较小的时候递归执行的比较多，消耗了性能
   return quickSort(left).concat(base, quickSort(right))
 }
 

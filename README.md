@@ -19,7 +19,7 @@
 ## 高级排序
 - [希尔排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/ShellSort.js)
 - [归并排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/MergeSort.js)
-
+- [快速排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/QuickSort.js)
 
 ## 参考资料
 
