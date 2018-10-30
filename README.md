@@ -21,6 +21,10 @@
 - [归并排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/MergeSort.js)
 - [快速排序](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/QuickSort.js)
 
+## 检索
+- [顺序(线性)查找](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/SeqSort.js)
+
+
 ## 参考资料
 
 - [JavaScript Algorithms and Data Structures](https://github.com/trekhleb/javascript-algorithms)
