@@ -25,6 +25,9 @@
 - [顺序(线性)查找](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/SeqSearch.js)
 - [二分查找](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/BinSearch.js)
 
-## 参考资料
+## 高级算法
+- [动态规划](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Dynamic.js)
+- [贪心算法]()
 
+## 参考资料
 - [JavaScript Algorithms and Data Structures](https://github.com/trekhleb/javascript-algorithms)
