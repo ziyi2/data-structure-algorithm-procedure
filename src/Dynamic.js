@@ -128,7 +128,7 @@ function lcs(word1, word2) {
   for(let i=0; i<=word1.length; i++) {
     for(let j=0; j<=word2.length; j++) {
 
-      // 默认矩阵的横竖起始位置都是0
+      // 默认矩阵的横竖起始位置的重复都是0
       if(i==0 || j==0) {
         lcsArr[i][j] = 0
         console.log(`${i} - ${j} : `,  lcsArr[i][j])
@@ -177,3 +177,97 @@ function lcs(word1, word2) {
 // 查看斜角的规律
 
 lcs('a1111bc', 'ca11111b')
+
+// 如果不用动态规划的方法，那么需要使用暴力方式，。给出两个字符串A 和B，我们可以通过从A 的第一
+// 个字符开始与B 的对应的每一个字符进行比对的方式找到它们的最长公共子串。如果此时
+// 没有找到匹配的字母，则移动到A 的第二个字符处，然后从B 的第一个字符处进行比对，
+// 以此类推。
+
+
+
+ /*
+
+背包问题：
+
+保险箱中有5 件物品，它们的尺寸分别是3、4、7、8、9，而它们的价值分别是4、5、10、11、13，且背包的容积为16，
+
+那么恰当的解决方案是选取第三件物品和第五件物品，他们的总尺寸是16，总价值是23。
+
+*/
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-11-05 08:58:36  
+ * @Desc:   递归解决背包问题（这个问题暂时没搞清楚，后续回顾）
+ * @Parm:    
+ */
+function max(a, b) {
+  return (a > b) ? a : b
+}
+
+
+function knapsack(capacity, size, value, n) {
+  if(n === 0 || capacity === 0) {
+    return 0
+  }
+
+  // 如果尺寸已经大于容量，则过滤该物品
+  if(size[n-1] > capacity) {
+    return knapsack(capacity, size, value, n - 1)
+  } else {
+  
+    let data1 = value[n-1] + knapsack(capacity - size[n-1], size, value, n - 1)
+    let data2 = knapsack(capacity, size, value, n - 1)
+
+    return max(data1, data2)
+  } 
+}
+
+var value = [13, 4, 5, 10, 11]
+var size = [9, 3, 4, 7, 8]
+var capacity = 16
+console.log(knapsack(capacity, size, value, 5))
+
+
+/** 
+ * @Author: zhuxiankang 
+ * @Date:   2018-11-05 08:58:36  
+ * @Desc:   动态规划解决背包问题(未加注释) 
+ * @Parm:    
+ */
+function dKnapsack(capacity, size, value, n) {
+  var k = []
+
+  for(let i=0; i<=capacity; i++) {
+    k[i] = []
+  }
+
+  for(let i=0; i<=n; i++) {
+    for(let j=0; j<=capacity; j++) {
+      if(i===0 || j===0) {
+        console.log(`if(i===0 || j===0): `)
+        console.log(`k[i][j]: `, k[i][j])
+        k[i][j] = 0
+      } else if(size[i-1] <= j) {
+        console.log(`else if(size[i-1] <= j): `)
+        k[i][j] = max(value[i-1] + k[i-1][j-size[i-1]], k[i-1][j])
+        console.log(`k[i][j]: `, k[i][j])
+      } else {
+        console.log(`else: `)
+        k[i][j] = k[i-1][j]
+        console.log(`k[i][j]: `, k[i][j])
+      }
+    }
+  }
+
+  return k[n][capacity]
+
+}
+
+
+var value = [4, 5, 10, 11, 13]
+var size = [3, 4, 7, 8, 9]
+var capacity = 16
+var n = 5
+console.log(dKnapsack(capacity, size, value, n))
