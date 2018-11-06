@@ -233,41 +233,47 @@ console.log(knapsack(capacity, size, value, 5))
 /** 
  * @Author: zhuxiankang 
  * @Date:   2018-11-05 08:58:36  
- * @Desc:   动态规划解决背包问题(未加注释) 
+ * @Desc:   动态规划解决背包问题
  * @Parm:    
  */
 function dKnapsack(capacity, size, value, n) {
   var k = []
 
-  for(let i=0; i<=capacity; i++) {
+  for(let i=0; i<=capacity + 1; i++) {
     k[i] = []
   }
 
   for(let i=0; i<=n; i++) {
     for(let j=0; j<=capacity; j++) {
       if(i===0 || j===0) {
-        console.log(`if(i===0 || j===0): `)
-        console.log(`k[i][j]: `, k[i][j])
         k[i][j] = 0
       } else if(size[i-1] <= j) {
-        console.log(`else if(size[i-1] <= j): `)
+        // k[i-1][j]是上一轮的值, 所以是和上一轮的值进行比较
+        // value[i-1]是当前值，k[i-1][j-size[i-1]]的值是剩余容量的最大值
+        // 所以value[i-1] + k[i-1][j-size[i-1]]是当前容量的值，继续和上一轮的最大值进行比较，从而获取当前轮的最大值
         k[i][j] = max(value[i-1] + k[i-1][j-size[i-1]], k[i-1][j])
-        console.log(`k[i][j]: `, k[i][j])
+      // 如果容量超出了限制，则采用上一轮的同位置的值(k[i-1][j]是上一轮的值)
       } else {
-        console.log(`else: `)
         k[i][j] = k[i-1][j]
-        console.log(`k[i][j]: `, k[i][j])
       }
     }
   }
-
+  
+  // 最后一个必须是最大值
   return k[n][capacity]
-
 }
 
 
 var value = [4, 5, 10, 11, 13]
 var size = [3, 4, 7, 8, 9]
-var capacity = 16
+var capacity = 14
 var n = 5
 console.log(dKnapsack(capacity, size, value, n))
+
+// [0, 0, 0, 0, 0, 0, 0, 0]
+// [0, 0, 0, 4, 4, 4, 4, 4]
+// [0, 0, 0, 4, 5, 5, 5, 9]
+// [0, 0, 0, 4, 5, 5, 5, 10] 例如这里的10是和上一轮的9进行比较，谁大就是填谁
+// [0, 0, 0, 4, 5, 5, 5, 10]
+// [0, 0, 0, 4, 5, 5, 5, 10]
+
