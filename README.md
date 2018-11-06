@@ -27,7 +27,7 @@
 
 ## 高级算法
 - [动态规划](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Dynamic.js)
-- [贪心算法](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Greedy.js))
+- [贪心算法](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Greedy.js)
 
 ## 参考资料
 - [JavaScript Algorithms and Data Structures](https://github.com/trekhleb/javascript-algorithms)
