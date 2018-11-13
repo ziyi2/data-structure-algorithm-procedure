@@ -31,3 +31,5 @@
 
 ## 参考资料
 - [JavaScript Algorithms and Data Structures](https://github.com/trekhleb/javascript-algorithms)
+
+$$p(x) = \prod_{j=1}^{n}p(x_{j};\mu_{j},\sigma_{j}^{2})$$
